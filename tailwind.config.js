@@ -73,6 +73,7 @@ module.exports = {
         "input-tweet": "32rem",
         "37.375rem": "37.375rem",
         "mobile-view-logo": "2.56013rem",
+        "desktop-view-logo": "37.07055rem",
       },
       height: {
         px: "1px",
@@ -84,6 +85,7 @@ module.exports = {
         360: "360px",
         8.5: "2.4375rem",
         "mobile-view-logo": "1.12663rem",
+        "desktop-view-logo": "12.4375rem",
         "search-icon": "1.1875rem",
         "input-tweet": "22.1875rem",
         "13.9375rem": "13.9375rem",

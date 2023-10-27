@@ -1,14 +1,15 @@
 import logo from "../../assets/logo.png";
 import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   return (
-    <div className="flex flex-col bg-neutral-1000 h-screen w-screen  md:justify-center md:flex-row md:px-178.436 md:py-236.5 md:gap-100">
-      <section className="flex justify-center py-3 px-4">
+    <div className="flex flex-col bg-neutral-1000 h-screen w-screen  md:justify-center md:flex-row  md:gap-100">
+      <section className="flex justify-center items-center py-3 px-4">
         <img
           src={logo}
           alt="logo"
-          className="h-mobile-view-logo w-mobile-view-logo md:h-150 md:w-300"
+          className="h-mobile-view-logo w-mobile-view-logo md:h-desktop-view-logo md:w-desktop-view-logo"
         />
       </section>
       <section className="flex flex-col px-7 gap-10 md:w-[490px]  mt-auto mb-auto">
@@ -34,7 +35,11 @@ function Login() {
           <p className="font-px-regular text-xl font-medium text-neutral-50">
             Already have an account?
           </p>
-          <Button variant="outline" text="Sign in" />
+          <Button
+            variant="outline"
+            text="Sign in"
+            onClick={useNavigate("/tweet")}
+          />
         </div>
       </section>
     </div>
