@@ -12,7 +12,7 @@ function Form({ onSubmit }) {
   const [selectedYear, setSelectedYear] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
 
     const formData = {
       name: nameInput,
@@ -217,7 +217,17 @@ function Form({ onSubmit }) {
         </div>
       </div>
       <div className="flex h-full px-4 flex-col justify-end self-stretch">
-        <Button variant="default" text="Create account" />
+        <Button
+          variant="default"
+          text="Create account"
+          disabled={
+            nameInput === "" ||
+            emailInput === "" ||
+            selectedDay === "" ||
+            selectedMonth === " " ||
+            selectedYear === ""
+          }
+        />
       </div>
     </form>
   );
