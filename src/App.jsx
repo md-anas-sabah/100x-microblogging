@@ -1,15 +1,18 @@
-import Login1 from "./pages/Login/Login";
+import AccountInfo from "./pages/Signup/AccountInfo";
+import Signup from "./pages/Signup/Signup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Tweet from "./pages/Tweet/Tweet";
+
+
+
 export default function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login1 />,
+      element: <Signup />,
     },
     {
-      path: "/tweet",
-      element: <Tweet />,
+      path: "/signup/account-info",
+      element: <AccountInfo />,
     },
   ]);
   return (

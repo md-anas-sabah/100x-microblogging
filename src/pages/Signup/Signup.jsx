@@ -2,7 +2,7 @@ import logo from "../../assets/logo.png";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Signup() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col bg-neutral-1000 h-screen w-screen  md:justify-center md:flex-row  md:gap-100">
@@ -16,7 +16,9 @@ function Login() {
             Join today.
           </div>
         </div>
-        <Button variant="default" text="Create account" />
+        <div onClick={() => navigate("/signup/account-info")}>
+          <Button variant="default" text="Create account" />
+        </div>
         <div className="flex items-center gap-2 w-full">
           <div className="w-full h-px bg-neutral-700" />
           <span className="font-chirp text-center text-base font-normal text-neutral-50">
@@ -49,4 +51,4 @@ function Logo() {
   );
 }
 
-export default Login;
+export default Signup;
