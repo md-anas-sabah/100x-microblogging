@@ -13,7 +13,7 @@ function AccountInfo() {
   const handleSubmit = (data) => {
     console.log(data);
     setFormData(data);
-    navigate("/");
+    navigate("/signup/accepted-info");
   };
 
   return (
