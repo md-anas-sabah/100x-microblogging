@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import ChevronDown from "../../assets/ChevronDown.png";
 import Button from "../../components/Button";
+import InputFieldset from "./InputFieldset";
 
 function Form({ onSubmit }) {
   const [nameInput, setNameInput] = useState("");
@@ -30,34 +31,20 @@ function Form({ onSubmit }) {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col items-center gap-8 self-stretch">
-        <fieldset className="custom-fieldset py-3 px-4 items-center self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
-          <legend className="font-px-regular text-xs font-medium text-neutral-500 px-4px">
-            Name
-          </legend>
-          <input
-            type="text"
-            value={nameInput}
-            onChange={(e) => {
-              setNameInput(e.target.value);
-            }}
-            placeholder="Name"
-            className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
-          />
-        </fieldset>
-        <fieldset className="custom-fieldset py-3 px-4 items-center self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
-          <legend className="font-px-regular text-xs font-medium text-neutral-500 px-4px">
-            Email
-          </legend>
-          <input
-            type="email"
-            placeholder="Email"
-            value={emailInput}
-            onChange={(e) => {
-              setEmailInput(e.target.value);
-            }}
-            className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
-          />
-        </fieldset>
+        <InputFieldset
+          name="Name"
+          type="text"
+          placeholder="Name"
+          getter={nameInput}
+          setter={setNameInput}
+        />
+        <InputFieldset
+          name="Email"
+          type="email"
+          placeholder="Email"
+          getter={emailInput}
+          setter={setEmailInput}
+        />
         <div className="flex flex-col gap-2 self-stretch">
           <h3 className="text-neutral-50 font-px-regular text-15px font-bold">
             Date of birth
@@ -82,13 +69,7 @@ function Form({ onSubmit }) {
               }}
               className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
             >
-              <option
-                value
-                disabled
-                selected
-                hidden
-                className="text-neutral-500"
-              >
+              <option disabled selected hidden className="text-neutral-500">
                 Month
               </option>
               <option value="january">January</option>
@@ -120,13 +101,7 @@ function Form({ onSubmit }) {
               }}
               className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
             >
-              <option
-                value
-                disabled
-                selected
-                hidden
-                className="text-neutral-500"
-              >
+              <option disabled selected hidden className="text-neutral-500">
                 Day
               </option>
               <option value={1}>1</option>
@@ -177,13 +152,7 @@ function Form({ onSubmit }) {
               }}
               className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
             >
-              <option
-                value
-                disabled
-                selected
-                hidden
-                className="text-neutral-500"
-              >
+              <option disabled selected hidden className="text-neutral-500">
                 Year
               </option>
               <option value={1999}>1999</option>
