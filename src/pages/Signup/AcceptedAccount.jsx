@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import tickCircle from "../../assets/tickCircle.png";
 import Header from "../../components/Signup/Header";
 import SubHeader from "../../components/Signup/SubHeader";
 
 function AcceptedAccount() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-3 pt-0 pb-5 px-15px bg-neutral-1000 h-screen w-screen">
       <Header step="2" />
@@ -53,13 +56,14 @@ function AcceptedAccount() {
         </div>
       </section>
       <section className="flex h-full px-4 flex-col justify-end self-stretch">
-        <a href="./create-account-step-3.html">
-          <button className="p-5 w-full rounded-full bg-twitter-blue shadow-custom backdrop-blur-custom">
-            <span className="text-neutral-50 font-px-regular text-base font-bold text-center">
-              Sign up
-            </span>
-          </button>
-        </a>
+        <button
+          className="p-5 w-full rounded-full bg-twitter-blue shadow-custom backdrop-blur-custom"
+          onClick={() => navigate("/signup/verify-account")}
+        >
+          <span className="text-neutral-50 font-px-regular text-base font-bold text-center">
+            Sign up
+          </span>
+        </button>
       </section>
     </div>
   );

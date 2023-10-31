@@ -2,6 +2,7 @@ import AcceptedAccount from "./pages/Signup/AcceptedAccount";
 import AccountInfo from "./pages/Signup/AccountInfo";
 import Signup from "./pages/Signup/Signup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Verification from "./pages/Signup/Verification";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,10 @@ export default function App() {
     {
       path: "/signup/accepted-info",
       element: <AcceptedAccount />,
+    },
+    {
+      path: "/signup/verify-account",
+      element: <Verification />,
     },
   ]);
   return (

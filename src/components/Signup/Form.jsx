@@ -67,9 +67,9 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedMonth(e.target.value);
               }}
-              className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
+              className="w-full appearance-none bg-black bg-transparent text-neutral-50 focus:outline-none"
             >
-              <option disabled hidden className="text-neutral-500">
+              <option value="Month" hidden className="text-neutral-500">
                 Month
               </option>
               <option value="january">January</option>
@@ -99,9 +99,9 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedDay(e.target.value);
               }}
-              className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
+              className="w-full appearance-none bg-transparent bg-black text-neutral-50 focus:outline-none"
             >
-              <option disabled selected hidden className="text-neutral-500">
+              <option value="Day" hidden className="text-neutral-500">
                 Day
               </option>
               <option value={1}>1</option>
@@ -150,9 +150,9 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedYear(e.target.value);
               }}
-              className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
+              className="w-full appearance-none bg-transparent bg-black text-neutral-50 focus:outline-none"
             >
-              <option disabled selected hidden className="text-neutral-500">
+              <option value="Year" hidden className="text-neutral-500">
                 Year
               </option>
               <option value={1999}>1999</option>
