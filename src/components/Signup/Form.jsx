@@ -69,7 +69,7 @@ function Form({ onSubmit }) {
               }}
               className="w-full appearance-none bg-transparent text-neutral-50 focus:outline-none"
             >
-              <option disabled selected hidden className="text-neutral-500">
+              <option disabled hidden className="text-neutral-500">
                 Month
               </option>
               <option value="january">January</option>

@@ -16,8 +16,6 @@ function AcceptedAccount() {
             <div className="flex justify-between">
               <input
                 type="text"
-                name
-                id
                 placeholder="Name"
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
@@ -31,8 +29,6 @@ function AcceptedAccount() {
             <div className="flex justify-between">
               <input
                 type="email"
-                name
-                id
                 placeholder="Email"
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
