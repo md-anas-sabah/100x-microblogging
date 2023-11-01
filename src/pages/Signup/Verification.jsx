@@ -1,7 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Signup/Header";
 
 function Verification() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-3 pt-0 pb-5 px-15px bg-neutral-1000 h-screen w-screen">
       <Header step="3" />
@@ -33,13 +36,14 @@ function Verification() {
         </div>
       </section>
       <section className="flex h-full pt-20 px-4 flex-col justify-end self-stretch">
-        <a href="./create-account-step-4.html">
-          <button className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
-            <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
-              Next
-            </span>
-          </button>
-        </a>
+        <button
+          onClick={() => navigate("/signup/create-password")}
+          className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
+        >
+          <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
+            Next
+          </span>
+        </button>
       </section>
     </div>
   );

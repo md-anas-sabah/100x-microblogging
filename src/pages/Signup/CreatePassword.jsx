@@ -1,21 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
+import Header from "../../components/Signup/Header";
+import visible from "../../assets/visible.png";
+import { useNavigate } from "react-router-dom";
+
 function CreatePassword() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-3 pt-0 pb-5 px-15px bg-neutral-1000 h-screen w-screen">
-      <header className="rounded-2xl flex flex-col py-3">
-        <div className="flex gap-5 self-stretch">
-          <a href="./index.html">
-            <img
-              src="../../public/images/signup-x.svg"
-              alt="cancel"
-              className="cursor-pointer w-6 h-6 flex-shrink-0"
-            />
-          </a>
-          <h1 className="font-px-regular text-15px font-bold text-neutral-50">
-            Step 4 of 4
-          </h1>
-        </div>
-      </header>
+      <Header step="4" />
       <section className="flex flex-col gap-10 self-stretch">
         <div className="flex flex-col gap-2 self-stretch">
           <h1 className="font-px-regular font-bold text-2xl text-neutral-50">
@@ -38,19 +30,20 @@ function CreatePassword() {
                 placeholder="Password"
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
-              <img src="../../public/images/visible-t.svg" alt="success" />
+              <img src={visible} alt="success" />
             </div>
           </fieldset>
         </div>
       </section>
       <section className="flex h-full px-4 flex-col justify-end self-stretch">
-        <a href="../home/index.html">
-          <button className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
-            <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
-              Next
-            </span>
-          </button>
-        </a>
+        <button
+          onClick={() => navigate("/homefeed")}
+          className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
+        >
+          <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
+            Next
+          </span>
+        </button>
       </section>
     </div>
   );
