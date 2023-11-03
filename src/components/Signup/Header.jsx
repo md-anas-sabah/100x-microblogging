@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import cross from "../../assets/cross.png";
 
@@ -21,5 +21,9 @@ function Header({ step }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  step: PropTypes.string.isRequired,
+};
 
 export default Header;

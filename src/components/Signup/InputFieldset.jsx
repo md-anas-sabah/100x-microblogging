@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
 function InputFieldset({ getter, setter, name, type, placeholder }) {
   return (
     <fieldset className="custom-fieldset py-3 px-4 items-center self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
@@ -17,5 +18,13 @@ function InputFieldset({ getter, setter, name, type, placeholder }) {
     </fieldset>
   );
 }
+
+InputFieldset.propTypes = {
+  getter: PropTypes.string,
+  setter: PropTypes.func,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 
 export default InputFieldset;

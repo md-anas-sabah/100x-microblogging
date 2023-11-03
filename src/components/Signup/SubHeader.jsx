@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+
 function SubHeader({ text }) {
   return (
     <section className="flex flex-col gap-5 self-stretch">
@@ -8,5 +9,9 @@ function SubHeader({ text }) {
     </section>
   );
 }
+
+SubHeader.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default SubHeader;

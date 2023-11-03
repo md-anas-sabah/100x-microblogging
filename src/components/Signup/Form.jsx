@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import ChevronDown from "../../assets/ChevronDown.png";
 import Button from "../../components/Button";
@@ -201,5 +201,9 @@ function Form({ onSubmit }) {
     </form>
   );
 }
+
+Form.propTypes = {
+  onSubmit: PropTypes.func,
+};
 
 export default Form;

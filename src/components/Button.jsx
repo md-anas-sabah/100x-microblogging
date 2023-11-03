@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function Button({ size, text, variant, disabled }) {
+function Button({ size = "md", text="Create your button", variant, disabled }) {
   const baseStyle = `flex w-full py-2 px-6 justify-center items-center rounded-4xl`;
 
   const sizeStyle = {
@@ -24,5 +24,9 @@ function Button({ size, text, variant, disabled }) {
     </button>
   );
 }
+
+// Button.propTypes = {
+//   size:
+// }
 
 export default Button;
