@@ -9,6 +9,8 @@ import Home from "./pages/Home/Home";
 import ComposeTweet from "./pages/ComposeTweet/ComposeTweet";
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
+import FormContextProvider from "./context/FormContext";
+import { TweetProvider } from "./context/TweetContext";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -50,8 +52,10 @@ export default function App() {
     },
   ]);
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <TweetProvider>
+      <FormContextProvider>
+        <RouterProvider router={router} />
+      </FormContextProvider>
+    </TweetProvider>
   );
 }

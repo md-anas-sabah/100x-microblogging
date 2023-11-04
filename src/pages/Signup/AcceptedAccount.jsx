@@ -2,9 +2,13 @@ import { useNavigate } from "react-router-dom";
 import tickCircle from "../../assets/tickCircle.png";
 import Header from "../../components/Signup/Header";
 import SubHeader from "../../components/Signup/SubHeader";
+import { useFormContext } from "../../context/FormContext";
 
 function AcceptedAccount() {
   const navigate = useNavigate();
+  const { nameInput, emailInput, selectedDay, selectedMonth, selectedYear } =
+    useFormContext();
+  const dateOfBirth = `${selectedDay} ${selectedMonth.toUpperCase()} ${selectedYear}`;
 
   return (
     <div className="flex flex-col gap-3 pt-0 pb-5 px-15px bg-neutral-1000 h-screen w-screen">
@@ -20,6 +24,7 @@ function AcceptedAccount() {
               <input
                 type="text"
                 placeholder="Name"
+                value={nameInput}
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
               <img src={tickCircle} alt="success" />
@@ -33,6 +38,7 @@ function AcceptedAccount() {
               <input
                 type="email"
                 placeholder="Email"
+                value={emailInput}
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
               <img src={tickCircle} alt="visible" />
@@ -45,8 +51,7 @@ function AcceptedAccount() {
             <div className="flex justify-between">
               <input
                 type="text"
-                name
-                id
+                value={dateOfBirth}
                 placeholder="Date of birth"
                 className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />

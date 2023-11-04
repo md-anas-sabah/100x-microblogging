@@ -1,16 +1,23 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 
 import ChevronDown from "../../assets/ChevronDown.png";
 import Button from "../../components/Button";
 import InputFieldset from "./InputFieldset";
+import { useFormContext } from "../../context/FormContext";
 
 function Form({ onSubmit }) {
-  const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
-  const [selectedDay, setSelectedDay] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
+  const {
+    nameInput,
+    setNameInput,
+    emailInput,
+    setEmailInput,
+    selectedDay,
+    setSelectedDay,
+    selectedMonth,
+    setSelectedMonth,
+    selectedYear,
+    setSelectedYear,
+  } = useFormContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -11,10 +11,13 @@ import Toast from "../../components/Home/Toast";
 import Menu from "../../components/Home/Menu";
 import Avatar from "../../components/Home/Avatar";
 import Logo from "../../components/Home/Logo";
+import { useTweetContext } from "../../context/TweetContext";
 
 const copyContent = false;
 
 const Home = () => {
+  const { tweets } = useTweetContext();
+  console.log(tweets);
   return (
     <div className="relative flex flex-col bg-neutral-1000 h-screen w-screen">
       <Avatar />
@@ -36,17 +39,22 @@ const Home = () => {
         </div>
       </div>
       <section className="flex flex-col h-fit overflow-hidden overflow-y-scroll">
-        <Tweet
-          avatar={avatar3}
-          commentLogo={comment}
-          retweetLogo={retweet}
-          heartLogo={heart}
-          reachLogo={reach}
-          shareLogo={share}
-          name="Monkey D Luffy"
-          handle="monkeyDLuffy"
-          timestamp="2hrs"
-        />
+        {tweets.map((tweet) => (
+          // Render each tweet using your Tweet component
+          <Tweet
+            key={tweet.id}
+            avatar={avatar3}
+            commentLogo={comment}
+            retweetLogo={retweet}
+            heartLogo={heart}
+            reachLogo={reach}
+            shareLogo={share}
+            name="Monkey D Luffy"
+            handle="monkeyDLuffy"
+            timestamp="2hrs"
+            text={tweet.text}
+          />
+        ))}
       </section>
       <AddPost />
       <div className="flex justify-center">{copyContent && <Toast />}</div>
