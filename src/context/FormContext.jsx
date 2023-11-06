@@ -7,8 +7,6 @@ export function useFormContext() {
   return useContext(FormContext);
 }
 
-
-
 function FormContextProvider({ children }) {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");

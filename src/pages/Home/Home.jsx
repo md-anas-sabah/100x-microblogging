@@ -53,6 +53,7 @@ const Home = () => {
             handle="monkeyDLuffy"
             timestamp="2hrs"
             text={tweet.text}
+            tweetId={tweet.id}
           />
         ))}
       </section>

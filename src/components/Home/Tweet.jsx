@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTweetContext } from "../../context/TweetContext";
 
 function Tweet({
   avatar,
@@ -11,11 +12,21 @@ function Tweet({
   handle = "username",
   text = "Write your tweet here.",
   commentCount = 0,
-  retweetCount = 0,
-  likeCount = 0,
   reachCount = 0,
   timestamp = "0hrs",
+  tweetId,
 }) {
+  const { likeTweet, retweetTweet, tweets } = useTweetContext();
+  const tweet = tweets.find((t) => t.id === tweetId);
+
+  const handleLikeClick = () => {
+    likeTweet(tweetId);
+  };
+
+  const handleRetweetClick = () => {
+    retweetTweet(tweetId);
+  };
+
   return (
     <div className="flex w-full bg-neutral-1000 self-stretch py-2 px-4 gap-4 border-b border-neutral-700">
       <img
@@ -42,13 +53,19 @@ function Tweet({
             <img src={commentLogo} alt="comment" />
             {commentCount}
           </span>
-          <span className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer">
+          <span
+            onClick={handleRetweetClick}
+            className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer"
+          >
             <img src={retweetLogo} alt="retweets" />
-            {retweetCount}
+            {tweet.retweetCount}
           </span>
-          <span className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer">
+          <span
+            onClick={handleLikeClick}
+            className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer"
+          >
             <img src={heartLogo} alt="like" />
-            {likeCount}
+            {tweet.likeCount}
           </span>
           <span className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer">
             <img src={reachLogo} alt="reach" />
@@ -77,7 +94,6 @@ Tweet.propTypes = {
   timestamp: PropTypes.string.isRequired,
   text: PropTypes.string,
   commentCount: PropTypes.number,
-  retweetCount: PropTypes.number,
-  likeCount: PropTypes.number,
   reachCount: PropTypes.number,
+  tweetId: PropTypes.number,
 };

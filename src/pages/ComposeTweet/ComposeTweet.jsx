@@ -3,21 +3,25 @@ import avatar from "../../assets/avatar.png";
 import cross from "../../assets/cross.png";
 import { useState } from "react";
 import { useTweetContext } from "../../context/TweetContext";
-// import ComposeTweetHeader from "../../components/ComposeTweet/ComposeTweetHeader";
+
+const tweetLimit = 280;
 
 function ComposeTweet() {
   const navigate = useNavigate();
   const { addTweet } = useTweetContext();
-  const [tweet, setTweet] = useState("");
+  const [tweetText, setTweetText] = useState("");
+
+  const isTweetExceedingLimit = tweetText.length > tweetLimit;
+
   const handleTweetSubmit = (e) => {
     e.preventDefault();
-    if (tweet.trim() !== "") {
+    if (tweetText.trim() !== "") {
       const newTweet = {
-        text: tweet,
+        text: tweetText,
       };
 
       addTweet(newTweet);
-      setTweet("");
+      setTweetText("");
       navigate("/homefeed");
     }
   };
@@ -34,7 +38,7 @@ function ComposeTweet() {
             />
           </Link>
           <button
-            disabled={tweet === ""}
+            disabled={tweetText === ""}
             className="flex py-2 px-6 rounded-5.5xl shadow-custom backdrop-blur-custom bg-twitter-blue hover:bg-twitter-blue-hover disabled:bg-twitter-blue-disabled"
           >
             <span className="text-neutral-50 text-center font-px-regular text-14px font-bold disabled:text-neutral-twitter-blue-disabled">
@@ -48,14 +52,14 @@ function ComposeTweet() {
             className="w-full bg-transparent resize-none outline-none font-px-regular text-base font-normal text-neutral-50"
             cols={30}
             rows={10}
-            value={tweet}
-            onChange={(e) => setTweet(e.target.value)}
+            value={tweetText}
+            onChange={(e) => setTweetText(e.target.value)}
             placeholder="What's Happening?!"
           />
         </section>
         <section className="flex items-end h-[604px]">
           <span className="py-3 px-4 border-t w-full border-neutral-800 text-neutral-500 font-px-regular font-normal">
-            0/280
+            0/{tweetLimit}
           </span>
         </section>
       </div>
