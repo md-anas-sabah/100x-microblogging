@@ -1,6 +1,6 @@
 import NavigateBack from "../../assets/NavigateBack.svg";
 import Camera from "../../assets/Camera.svg";
-import Cross from "../../assets/Cross.png";
+import cross from "../../assets/cross.png";
 import coverImage from "../../assets/coverImage.png";
 import avatar from "../../assets/avatar.png";
 
@@ -31,7 +31,7 @@ function EditProfile() {
             className="flex p-1 justify-center items-center rounded-full bg-opac-edit"
           />
           <img
-            src={Cross}
+            src={cross}
             alt="remove"
             className="flex p-1 justify-center items-center rounded-full bg-opac-edit"
           />
