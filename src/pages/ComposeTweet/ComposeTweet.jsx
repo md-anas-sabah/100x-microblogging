@@ -38,7 +38,7 @@ function ComposeTweet() {
             />
           </Link>
           <button
-            disabled={tweetText === ""}
+            disabled={tweetText === "" || tweetText.length > tweetLimit}
             className="flex py-2 px-6 rounded-5.5xl shadow-custom backdrop-blur-custom bg-twitter-blue hover:bg-twitter-blue-hover disabled:bg-twitter-blue-disabled"
           >
             <span className="text-neutral-50 text-center font-px-regular text-14px font-bold disabled:text-neutral-twitter-blue-disabled">
@@ -49,7 +49,7 @@ function ComposeTweet() {
         <section className="py-3 px-4 flex gap-3">
           <img src={avatar} alt="user" className="w-9 h-9 flex-shrink-0" />
           <textarea
-            className="w-full bg-transparent resize-none outline-none font-px-regular text-base font-normal text-neutral-50"
+            className={`w-full bg-transparent resize-none outline-none font-px-regular text-base font-normal text-neutral-50 `}
             cols={30}
             rows={10}
             value={tweetText}
@@ -58,8 +58,15 @@ function ComposeTweet() {
           />
         </section>
         <section className="flex items-end h-[604px]">
-          <span className="py-3 px-4 border-t w-full border-neutral-800 text-neutral-500 font-px-regular font-normal">
-            0/{tweetLimit}
+          <span
+            className={`py-3 px-4 border-t w-full border-neutral-800 text-neutral-500 font-px-regular font-normal ${
+              isTweetExceedingLimit ? "text-error" : "text-neutral-500"
+            }`}
+          >
+            {isTweetExceedingLimit
+              ? tweetLimit - tweetText.length
+              : tweetText.length}
+            /{tweetLimit}
           </span>
         </section>
       </div>
