@@ -1,4 +1,9 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+
+import onClickRetweet from "../../assets/onClickRetweet.svg";
+import onClickLike from "../../assets/onClickLike.svg";
+
 import { useTweetContext } from "../../context/TweetContext";
 
 function Tweet({
@@ -16,15 +21,19 @@ function Tweet({
   timestamp = "0hrs",
   tweetId,
 }) {
+  const [retweet, setRetweet] = useState(false);
+  const [like, setLike] = useState(false);
   const { likeTweet, retweetTweet, tweets } = useTweetContext();
   const tweet = tweets.find((t) => t.id === tweetId);
 
   const handleLikeClick = () => {
     likeTweet(tweetId);
+    setLike(!like);
   };
 
   const handleRetweetClick = () => {
     retweetTweet(tweetId);
+    setRetweet(!retweet);
   };
 
   return (
@@ -55,16 +64,16 @@ function Tweet({
           </span>
           <span
             onClick={handleRetweetClick}
-            className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer"
+            className={`flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer`}
           >
-            <img src={retweetLogo} alt="retweets" />
+            <img src={retweet ? onClickRetweet : retweetLogo} alt="retweets" />
             {tweet.retweetCount}
           </span>
           <span
             onClick={handleLikeClick}
             className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer"
           >
-            <img src={heartLogo} alt="like" />
+            <img src={like ? onClickLike : heartLogo} alt="like" />
             {tweet.likeCount}
           </span>
           <span className="flex justify-center items-center gap-2 font-px-regular text-sm text-neutral-500 font-normal cursor-pointer">
