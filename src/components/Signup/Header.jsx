@@ -7,14 +7,14 @@ function Header({ step }) {
   const navigate = useNavigate();
   return (
     <header className="bg-neutral-1000 flex flex-col py-3">
-      <div className="flex gap-5 self-stretch">
+      <div className="flex gap-5 self-stretch items-center">
         <img
           src={cross}
           alt="cancel"
-          className="cursor-pointer flex-shrink-0"
+          className="cursor-pointer flex-shrink-0 md:h-4"
           onClick={() => navigate("/")}
         />
-        <h1 className="font-px-regular text-15px font-bold text-neutral-50">
+        <h1 className="font-px-regular text-15px font-bold text-neutral-50 md:text-sm">
           Step {step} of 4
         </h1>
       </div>

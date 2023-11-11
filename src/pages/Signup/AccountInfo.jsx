@@ -17,10 +17,12 @@ function AccountInfo() {
   };
 
   return (
-    <div className="flex flex-col gap-3 pt-0 pb-5 px-15px bg-neutral-1000 h-screen w-screen">
-      <Header step="1" />
-      <SubHeader text="Create your account" />
-      <Form onSubmit={handleSubmit} />
+    <div className=" flex flex-col justify-center md:h-screen bg-neutral-1000  w-screen">
+      <div className="flex flex-col h-screen md:h-fit gap-3 md:gap-1 pt-0 pb-5 px-15px md:w-390 md:border md:rounded-md  md:border-gray-700 md:ml-auto md:mr-auto  ">
+        <Header step="1" />
+        <SubHeader text="Create your account" />
+        <Form onSubmit={handleSubmit} />
+      </div>
     </div>
   );
 }

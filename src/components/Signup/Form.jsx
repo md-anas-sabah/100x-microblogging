@@ -37,7 +37,7 @@ function Form({ onSubmit }) {
       className="flex flex-col h-full justify-between"
       onSubmit={handleSubmit}
     >
-      <div className="flex flex-col items-center gap-8 self-stretch">
+      <div className="flex flex-col items-center gap-8 md:gap-2 self-stretch">
         <InputFieldset
           name="Name"
           type="text"
@@ -53,16 +53,16 @@ function Form({ onSubmit }) {
           setter={setEmailInput}
         />
         <div className="flex flex-col gap-2 self-stretch">
-          <h3 className="text-neutral-50 font-px-regular text-15px font-bold">
+          <h3 className="text-neutral-50 font-px-regular text-15px md:text-sm font-bold">
             Date of birth
           </h3>
-          <p className="font-px-regular text-14px font-normal text-secondary-text">
+          <p className="font-px-regular text-14px md:text-xs font-normal text-secondary-text">
             This will not be shown publicly. Confirm your own age, even if this
             account is for a business, a pet, or something else.
           </p>
         </div>
         <div className="flex items-center gap-3 self-stretch">
-          <fieldset className="w-2/3 group flex py-4 px-3 justify-between items-center self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
+          <fieldset className="w-2/3 group flex py-4 px-3  justify-between items-center md:h-14 self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
             <legend className="group-focus-within:text-twitter-blue font-px-regular text-xs font-medium text-neutral-500 px-1">
               Month
             </legend>
@@ -74,7 +74,7 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedMonth(e.target.value);
               }}
-              className="w-full appearance-none bg-black bg-transparent text-neutral-50 focus:outline-none"
+              className="w-full md:text-sm appearance-none bg-neutral-1000 text-neutral-50 focus:outline-none"
             >
               <option value="Month" hidden className="text-neutral-500">
                 Month
@@ -94,7 +94,7 @@ function Form({ onSubmit }) {
             </select>
             <img src={ChevronDown} alt="ChevronDown" className="h-6 w-6" />
           </fieldset>
-          <fieldset className="flex w-1/3 py-4 px-3 justify-between items-center self-stretch rounded-4px border border-neutral-500">
+          <fieldset className="flex md:h-14 w-1/3 py-4 px-3 justify-between items-center self-stretch rounded-4px border border-neutral-500">
             <legend className="font-px-regular text-xs font-medium text-neutral-500 px-1">
               Day
             </legend>
@@ -106,7 +106,7 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedDay(e.target.value);
               }}
-              className="w-full appearance-none bg-transparent bg-black text-neutral-50 focus:outline-none"
+              className="w-full md:text-sm appearance-none  bg-neutral-1000 text-neutral-50 focus:outline-none"
             >
               <option value="Day" hidden className="text-neutral-500">
                 Day
@@ -145,7 +145,7 @@ function Form({ onSubmit }) {
             </select>
             <img src={ChevronDown} alt="ChevronDown" className="h-6 w-6" />
           </fieldset>
-          <fieldset className="flex w-1/3 py-4 px-3 justify-between items-center self-stretch rounded-4px border border-neutral-500">
+          <fieldset className="flex md:h-14 w-1/3 py-4 px-3 justify-between items-center self-stretch rounded-4px border border-neutral-500">
             <legend className="font-px-regular text-xs font-medium text-neutral-500 px-1">
               Year
             </legend>
@@ -157,7 +157,7 @@ function Form({ onSubmit }) {
               onChange={(e) => {
                 setSelectedYear(e.target.value);
               }}
-              className="w-full appearance-none bg-transparent bg-black text-neutral-50 focus:outline-none"
+              className="w-full md:text-sm  appearance-none bg-neutral-1000 text-neutral-50 focus:outline-none"
             >
               <option value="Year" hidden className="text-neutral-500">
                 Year
@@ -192,7 +192,7 @@ function Form({ onSubmit }) {
           </fieldset>
         </div>
       </div>
-      <div className="flex h-full px-4 flex-col justify-end self-stretch">
+      <div className="flex h-full px-4 flex-col justify-end md:justify-start md:mt-10 self-stretch">
         <Button
           variant="default"
           text="Create account"
