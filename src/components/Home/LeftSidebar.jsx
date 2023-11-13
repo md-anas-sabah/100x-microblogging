@@ -1,11 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import logo from "../../assets/logo.png";
 import home from "../../assets/home.svg";
+import option from "../../assets/option.svg";
 import group from "../../assets/group.svg";
+
+import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
 
 function LeftSidebar() {
+  const [showOption, setShowOption] = useState(false);
+
+  const handleOption = () => {
+    setShowOption(!showOption);
+  };
+
   return (
     <div className="flex-col justify-between text-white flex flex-0 w-[17rem] p-5 border-r border-gray-700">
       <div className="w-full">
@@ -36,14 +45,26 @@ function LeftSidebar() {
           <span className="text-center text-base font-bold">Post</span>
         </button>
       </div>
-      <div className=" ">
+      <div
+        className="flex justify-between hover:bg-gray-800 h-16 p-2 rounded-full cursor-pointer"
+        onClick={handleOption}
+      >
         <div className="flex gap-2 items-center ">
           <img src={avatar} alt="user" className="w-9 h-9 flex-shrink-0" />
           <div className="flex flex-col">
             <p className="">md_anas_sabah</p>
-            <p className=" text-sm text-gray-500 ">@mdanassabah</p>
+            <p className=" text-sm text-gray-500 ">@MdAnasSabah</p>
           </div>
         </div>
+
+        <img src={option} alt="option" />
+      </div>
+      <div
+        className={`${
+          showOption ? "flex" : "hidden"
+        } bg-neutral-1000  items-center justify-center border shadow shadow-white  h-12 w-52 absolute bottom-[90px] left-[265px] rounded-lg cursor-pointer`}
+      >
+        Log out @MdAnasSabah
       </div>
     </div>
   );
