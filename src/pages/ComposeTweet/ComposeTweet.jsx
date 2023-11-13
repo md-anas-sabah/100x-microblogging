@@ -60,7 +60,7 @@ function ComposeTweet() {
         <section className="flex items-end h-[604px]">
           <span
             className={`py-3 px-4 border-t w-full border-neutral-800 text-neutral-500 font-px-regular font-normal ${
-              isTweetExceedingLimit ? "text-error" : "text-neutral-500"
+              isTweetExceedingLimit ? "text-red-900" : "text-neutral-500"
             }`}
           >
             {isTweetExceedingLimit
