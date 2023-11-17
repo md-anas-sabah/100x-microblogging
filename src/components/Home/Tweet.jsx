@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import onClickRetweet from "../../assets/onClickRetweet.svg";
@@ -23,21 +23,30 @@ function Tweet({
 }) {
   const [retweet, setRetweet] = useState(false);
   const [like, setLike] = useState(false);
+  const [localLike, setLocalLike] = useState(false);
+  const [localRetweet, setLocalRetweet] = useState(false);
   const { likeTweet, retweetTweet, tweets } = useTweetContext();
   const tweet = tweets.find((t) => t.id === tweetId);
 
+  useEffect(() => {
+    setLocalLike(tweet.liked);
+    setLocalRetweet(tweet.retweeted);
+  }, [tweet]);
+
   const handleLikeClick = () => {
     likeTweet(tweetId);
+    setLocalLike(!localLike);
     setLike(!like);
   };
 
   const handleRetweetClick = () => {
     retweetTweet(tweetId);
+    setLocalRetweet(!localRetweet);
     setRetweet(!retweet);
   };
 
   return (
-    <div className="flex w-full bg-neutral-1000 self-stretch py-2 px-4 gap-4 border-b border-neutral-700">
+    <div className="flex  w-full bg-neutral-1000 self-stretch py-2 px-4 gap-4 border-b border-neutral-700">
       <img
         src={avatar}
         alt="user"

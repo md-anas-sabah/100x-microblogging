@@ -27,7 +27,6 @@ const MobileResponsive = () => {
       <Tabs />
       <section className="flex flex-col h-fit overflow-hidden overflow-y-scroll">
         {tweets.map((tweet) => (
-          // Render each tweet using your Tweet component
           <Tweet
             key={tweet.id}
             avatar={avatar3}
