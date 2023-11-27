@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function ProfileHeader() {
   return (
-    <header>
+    <header className="overflow-hidden">
       <img src={coverImage} alt="cover image" className="w-full" />
       <section className="px-4 flex justify-between relative">
         <img

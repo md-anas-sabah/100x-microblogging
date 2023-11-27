@@ -66,7 +66,6 @@ function Feed() {
       </form>
       <section className="flex flex-col h-fit">
         {tweets.map((tweet) => (
-          // Render each tweet using your Tweet component
           <Tweet
             key={tweet.id}
             avatar={avatar3}

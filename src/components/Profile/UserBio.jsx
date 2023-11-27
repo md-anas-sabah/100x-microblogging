@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function UserBio() {
   return (
-    <section className="px-4 py-2 flex flex-col gap-4">
+    <section className="px-4 py-2 flex flex-col gap-4 overflow-hidden">
       <div className="flex flex-col gap-1">
         <h1 className="font-px-regular text-xl font-bold text-neutral-50">
           Md Anas Sabah
