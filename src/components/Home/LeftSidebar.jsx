@@ -7,12 +7,23 @@ import group from "../../assets/group.svg";
 
 import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
+import Modal from "../Modal";
 
 function LeftSidebar() {
   const [showOption, setShowOption] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleOption = () => {
     setShowOption(!showOption);
+  };
+  const handlePostButtonClick = () => {
+    console.log("clicked post");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -41,10 +52,14 @@ function LeftSidebar() {
             </Link>
           </li>
         </ul>
-        <button className="py-[15px] mt-10 px-[93px] justify-center align-center flex gap-[10px] rounded-[9999px] bg-twitter-blue">
+        <button
+          onClick={handlePostButtonClick}
+          className="py-[15px] mt-10 px-[93px] justify-center align-center flex gap-[10px] rounded-[9999px] bg-twitter-blue"
+        >
           <span className="text-center text-base font-bold">Post</span>
         </button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
       <div
         className="flex justify-between hover:bg-gray-800 h-16 p-2 rounded-full cursor-pointer"
         onClick={handleOption}
