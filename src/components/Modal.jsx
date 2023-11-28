@@ -4,8 +4,8 @@ function Modal({ isOpen, onClose }) {
     <div
       className={`${isOpen ? "absolute top-[22rem] left-[45rem]" : "hidden"}`}
     >
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>
+      <div className="">
+        <span className="" onClick={onClose}>
           &times;
         </span>
         <p>Modal Content Goes Here</p>
