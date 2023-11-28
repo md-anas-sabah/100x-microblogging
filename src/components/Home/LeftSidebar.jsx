@@ -27,7 +27,9 @@ function LeftSidebar() {
   };
 
   return (
-    <div className="flex-col justify-between text-white flex flex-0 w-[17rem] p-5 border-r border-gray-700">
+    <div
+      className={`flex-col justify-between text-white flex flex-0 w-[17rem] p-5 border-r border-gray-700}`}
+    >
       <div className="w-full">
         <div>
           <img src={logo} alt="logo" className="h-4 w-mobile-view-logo" />
@@ -59,7 +61,9 @@ function LeftSidebar() {
           <span className="text-center text-base font-bold">Post</span>
         </button>
       </div>
+
       <Modal isOpen={isModalOpen} onClose={closeModal} />
+
       <div
         className="flex justify-between hover:bg-gray-800 h-16 p-2 rounded-full cursor-pointer"
         onClick={handleOption}
