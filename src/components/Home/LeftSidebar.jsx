@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import home from "../../assets/home.svg";
 import option from "../../assets/option.svg";
@@ -7,11 +7,10 @@ import group from "../../assets/group.svg";
 
 import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
-import Modal from "../Modal";
+import Modal from "../PostModal";
 
 function LeftSidebar() {
   const [showOption, setShowOption] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOption = () => {
@@ -36,22 +35,22 @@ function LeftSidebar() {
         </div>
         <ul className="mt-7 flex w-full flex-col gap-4">
           <li className="cursor-pointer ">
-            <Link
+            <NavLink
               to="/homefeed"
               className="flex items-center gap-4 font-px-regular"
             >
               <img src={home} alt="home" className="h-6 w-6" />
               <p>Home</p>
-            </Link>
+            </NavLink>
           </li>
           <li className="cursor-pointer">
-            <Link
+            <NavLink
               to="/userprofile"
               className="flex items-center gap-4 font-px-regular"
             >
               <img src={group} alt="profile" className="h-5 w-6" />
               <p>Profile</p>
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <button

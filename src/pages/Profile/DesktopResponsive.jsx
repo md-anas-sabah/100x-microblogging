@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Feed from "../../components/Profile/Feed";
 import LeftSidebar from "../../components/Home/LeftSidebar";
 import RightSidebar from "../../components/Home/RightSidebar";
