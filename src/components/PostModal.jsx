@@ -23,7 +23,6 @@ function PostModal({ isOpen, onClose }) {
       const newTweet = {
         text: tweetText,
       };
-
       addTweet(newTweet);
       setTweetText("");
       navigate("/homefeed");

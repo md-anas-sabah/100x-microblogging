@@ -10,7 +10,7 @@ function ProfileHeader() {
         <img
           src={avatar}
           alt="profile-img"
-          className="w-68 h-68 rounded-full border-4 border-neutral-1000 flex-shrink-0 object-fill -mt-8"
+          className="w-68  h-68 rounded-full border-4 border-neutral-1000 flex-shrink-0 object-fill -mt-8"
         />
         <Link to="/edit-userprofile">
           <button className="absolute right-4 top-2 inline-flex py-2 px-5 justify-center items-center rounded-5.5xl border-1 border-blue-20 shadow-custom backdrop-blur-custom">

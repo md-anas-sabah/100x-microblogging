@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../assets/logo.png";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+
+import google from "../../assets/google.svg";
 
 const BASE_URL = "https://one00x-react-backend.onrender.com";
 
@@ -37,37 +40,45 @@ function Signup() {
       <Logo />
       <section className="flex flex-col px-7 gap-10  mt-auto mb-auto">
         <div className="flex flex-col gap-3 self-stretch text-neutral-50">
-          <div className="font-px-regular font-extrabold text-31px md:font-bold md:text-5xl">
+          <div className="font-px-regular font-extrabold text-31px md:font-bold md:text-6xl">
             Happening Now
           </div>
-          <div className="font-px-regular font-medium md:font-bold md:text-2.5 text-base">
+          <div className="font-px-regular font-medium md:font-bold md:text-2.5 text-base md:mt-5">
             Join today.
           </div>
         </div>
-        <div onClick={() => navigate("/signup/account-info")}>
-          <Button variant="default" text="Create account" />
-        </div>
-        <div className="flex items-center gap-2 w-full">
-          <div className="w-full h-px bg-neutral-700" />
-          <span className="font-chirp text-center text-base font-normal text-neutral-50">
-            or
-          </span>
-          <div className="w-full h-px bg-neutral-700" />
-        </div>
-        <div className="flex flex-col gap-5 self-stretch">
-          <p className="font-px-regular text-xl font-medium text-neutral-50">
-            Already have an account?
-          </p>
-          <div
-            onClick={() => handleSignIn("batman@example.com", "gothamrocks")}
-          >
-            <Button variant="outline" text="Sign in" />
+        <div className="flex w-full flex-col gap-4 md:w-[280px]">
+          <button className="flex w-full py-2 px-6 justify-center items-center gap-2 rounded-[65px] bg-neutral-50 shadow-custom backdrop-blur-custom">
+            <img src={google} alt="google-icon" className="shrink-0 h-6 w-6" />
+            <span className="text-neutral-1000 text-base font-bold text-center">
+              Sign in with Google
+            </span>
+          </button>
+          <div onClick={() => navigate("/signup/account-info")}>
+            <Button variant="default" text="Create account" />
           </div>
-          {showError && (
-            <h1 className="text-red-900 text-center font-bold font-px-regular">
-              User not found
-            </h1>
-          )}
+          <div className="flex items-center gap-2 w-full">
+            <div className="w-full h-px bg-neutral-700" />
+            <span className="font-chirp text-center text-base font-normal text-neutral-50">
+              or
+            </span>
+            <div className="w-full h-px bg-neutral-700" />
+          </div>
+          <div className="flex flex-col gap-5 self-stretch">
+            <p className="font-px-regular text-xl font-medium text-neutral-50">
+              Already have an account?
+            </p>
+            <div
+              onClick={() => handleSignIn("batman@example.com", "gothamrocks")}
+            >
+              <Button variant="outline" text="Sign in" />
+            </div>
+            {showError && (
+              <h1 className="text-red-900 text-center font-bold font-px-regular">
+                User not found
+              </h1>
+            )}
+          </div>
         </div>
       </section>
     </div>
