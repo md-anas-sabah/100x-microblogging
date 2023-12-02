@@ -30,3 +30,5 @@
   //     });
   //   });
   // };
+
+  absolute top-[2rem] left-[31rem]  

@@ -5,13 +5,23 @@ import logo from "../../assets/logo.png";
 import Button from "../../components/Button";
 
 import google from "../../assets/google.svg";
+import SignInModal from "../../components/SignInModal";
 
 const BASE_URL = "https://one00x-react-backend.onrender.com";
 
 function Signup() {
   const [showError, setShowError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handlePostButtonClick = () => {
+    console.log("clicked post");
+    setIsModalOpen(true);
+  };
 
+  // eslint-disable-next-line no-unused-vars
   const handleSignIn = async (email, password) => {
     try {
       const response = await fetch(`${BASE_URL}/login`, {
@@ -54,9 +64,6 @@ function Signup() {
               Sign in with Google
             </span>
           </button>
-          <div onClick={() => navigate("/signup/account-info")}>
-            <Button variant="default" text="Create account" />
-          </div>
           <div className="flex items-center gap-2 w-full">
             <div className="w-full h-px bg-neutral-700" />
             <span className="font-chirp text-center text-base font-normal text-neutral-50">
@@ -64,13 +71,14 @@ function Signup() {
             </span>
             <div className="w-full h-px bg-neutral-700" />
           </div>
+          <div onClick={() => navigate("/signup/account-info")}>
+            <Button variant="default" text="Create account" />
+          </div>
           <div className="flex flex-col gap-5 self-stretch">
-            <p className="font-px-regular text-xl font-medium text-neutral-50">
+            <p className="mt-10 font-px-regular text-xl font-medium text-neutral-50">
               Already have an account?
             </p>
-            <div
-              onClick={() => handleSignIn("batman@example.com", "gothamrocks")}
-            >
+            <div onClick={handlePostButtonClick}>
               <Button variant="outline" text="Sign in" />
             </div>
             {showError && (
@@ -79,6 +87,7 @@ function Signup() {
               </h1>
             )}
           </div>
+          <SignInModal isOpen={isModalOpen} onClose={closeModal} />
         </div>
       </section>
     </div>

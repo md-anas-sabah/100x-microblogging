@@ -41,7 +41,7 @@ function PostModal({ isOpen, onClose }) {
 
       <div
         className={`${
-          isOpen ? "absolute top-[10rem] left-[34rem]  " : "hidden"
+          isOpen ? "flex flex-col justify-center items-center" : "hidden"
         }`}
       >
         <form
@@ -51,7 +51,7 @@ function PostModal({ isOpen, onClose }) {
           <img
             src={cross}
             alt="close"
-            className="absolute top-2 left-2 p-1 cursor-pointer"
+            className="absolute top-2 left-2 p-1 cursor-pointer hover:bg-gray-800 rounded-full"
             onClick={onClose}
           />
           <section className=" mt-9 flex flex-col">
