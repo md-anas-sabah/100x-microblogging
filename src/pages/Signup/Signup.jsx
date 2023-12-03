@@ -10,18 +10,17 @@ import SignInModal from "../../components/SignInModal";
 const BASE_URL = "https://one00x-react-backend.onrender.com";
 
 function Signup() {
-  const [showError, setShowError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const handlePostButtonClick = () => {
-    console.log("clicked post");
+  const openModal = () => {
     setIsModalOpen(true);
   };
 
-  // eslint-disable-next-line no-unused-vars
   const handleSignIn = async (email, password) => {
     try {
       const response = await fetch(`${BASE_URL}/login`, {
@@ -78,16 +77,16 @@ function Signup() {
             <p className="mt-10 font-px-regular text-xl font-medium text-neutral-50">
               Already have an account?
             </p>
-            <div onClick={handlePostButtonClick}>
+            <div onClick={openModal}>
               <Button variant="outline" text="Sign in" />
             </div>
-            {showError && (
-              <h1 className="text-red-900 text-center font-bold font-px-regular">
-                User not found
-              </h1>
-            )}
           </div>
-          <SignInModal isOpen={isModalOpen} onClose={closeModal} />
+          <SignInModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            handleSignIn={handleSignIn}
+            showError={showError}
+          />
         </div>
       </section>
     </div>

@@ -1,19 +1,13 @@
-/* eslint-disable no-unused-vars */
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
 import cross from "../assets/cross.png";
 import logo from "../assets/logo.png";
 import google from "../assets/google.svg";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useTweetContext } from "../context/TweetContext";
 
-const tweetLimit = 280;
-
-function PostModal({ isOpen, onClose }) {
-  const [tweetText, setTweetText] = useState("");
-  const [close, setClose] = useState(false);
-  const navigate = useNavigate();
-
+function PostModal({ isOpen, onClose, handleSignIn, showError }) {
+  const [inputText, setInputText] = useState("batman@example.com");
   return (
     <div
       className={`${
@@ -65,18 +59,30 @@ function PostModal({ isOpen, onClose }) {
                 </span>
                 <div className="w-full h-px bg-neutral-700" />
               </div>
-              <form className="w-full flex flex-col gap-3 ">
+              <div className="w-full flex flex-col gap-3 ">
                 <input
                   type="text"
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
                   placeholder="Phone,email or username"
                   className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
                 />
-                <button className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
+                <button
+                  onClick={() =>
+                    handleSignIn("batman@example.com", "gothamrocks")
+                  }
+                  className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
+                >
                   <span className="text-neutral-1000 font-chirp text-center text-base font-bold">
                     Next
                   </span>
                 </button>
-              </form>
+                {showError && (
+                  <h1 className="text-red-900 text-center font-bold font-px-regular">
+                    User not found
+                  </h1>
+                )}
+              </div>
               <button className="mt-4 flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-1000 border border-gray-500 shadow-custom backdrop-blur-custom hover:bg-neutral-800 disabled:bg-neutral-700">
                 <span className="text-neutral-50 font-chirp text-center text-base font-bold">
                   Forgot Password?
@@ -104,6 +110,8 @@ export default PostModal;
 PostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  handleSignIn: PropTypes.func.isRequired,
+  showError: PropTypes.bool.isRequired,
 };
 
 function Logo() {
