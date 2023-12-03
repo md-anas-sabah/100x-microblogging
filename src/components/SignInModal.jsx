@@ -4,7 +4,7 @@ import cross from "../assets/cross.png";
 import logo from "../assets/logo.png";
 import google from "../assets/google.svg";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTweetContext } from "../context/TweetContext";
 
 const tweetLimit = 280;
@@ -14,22 +14,6 @@ function PostModal({ isOpen, onClose }) {
   const [close, setClose] = useState(false);
   const navigate = useNavigate();
 
-  // const { addTweet } = useTweetContext();
-
-  // const isTweetExceedingLimit = tweetText.length > tweetLimit;
-
-  // const handleTweetSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (tweetText.trim() !== "") {
-  //     const newTweet = {
-  //       text: tweetText,
-  //     };
-  //     addTweet(newTweet);
-  //     setTweetText("");
-  //     navigate("/homefeed");
-  //     setClose(() => onClose());
-  //   }
-  // };
   return (
     <div
       className={`${
@@ -47,7 +31,7 @@ function PostModal({ isOpen, onClose }) {
           isOpen ? "flex flex-col justify-center items-center" : "hidden"
         }`}
       >
-        <div className="flex flex-col bg-neutral-1000 border border-gray-600 rounded-xl  h-[40rem] w-[35rem] p-4 relative">
+        <div className="flex flex-col h-[27rem] w-[20rem] bg-neutral-1000 border border-gray-600 rounded-xl  md:h-[40rem] md:w-[35rem] p-4 relative">
           <div className="flex justify-center">
             <img
               src={cross}
@@ -59,12 +43,12 @@ function PostModal({ isOpen, onClose }) {
               <Logo />
             </div>
           </div>
-          <div className="flex flex-col gap-12 w-3/5 ml-auto mr-auto mt-5">
-            <h1 className="font-px-regular font-bold text-3xl">
+          <div className="flex flex-col md:gap-12 gap-8 w-3/4 md:w-3/5 ml-auto mr-auto mt-5">
+            <h1 className="font-px-regular font-bold md:text-3xl text-2xl">
               Sign in to 100x
             </h1>
-            <div className="flex flex-col gap-5">
-              <button className="flex w-full py-2 px-6 justify-center items-center gap-2 rounded-[65px] bg-neutral-50 shadow-custom backdrop-blur-custom">
+            <div className="flex flex-col md:gap-5 gap-2">
+              <button className="flex w-full px-4 py-3 md:py-2 md:px-6 justify-center items-center gap-2 rounded-[65px] bg-neutral-50 shadow-custom backdrop-blur-custom">
                 <img
                   src={google}
                   alt="google-icon"
@@ -81,6 +65,32 @@ function PostModal({ isOpen, onClose }) {
                 </span>
                 <div className="w-full h-px bg-neutral-700" />
               </div>
+              <form className="w-full flex flex-col gap-3 ">
+                <input
+                  type="text"
+                  placeholder="Phone,email or username"
+                  className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
+                />
+                <button className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
+                  <span className="text-neutral-1000 font-chirp text-center text-base font-bold">
+                    Next
+                  </span>
+                </button>
+              </form>
+              <button className="mt-4 flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-1000 border border-gray-500 shadow-custom backdrop-blur-custom hover:bg-neutral-800 disabled:bg-neutral-700">
+                <span className="text-neutral-50 font-chirp text-center text-base font-bold">
+                  Forgot Password?
+                </span>
+              </button>
+              <p className="text-gray-500 mt-1 flex text-sm">
+                Don&apos;t have an account?
+                <Link
+                  to="/signup/account-info"
+                  className="text-twitter-blue ml-2 md:ml-1 font-bold"
+                >
+                  Signup
+                </Link>
+              </p>
             </div>
           </div>
         </div>
@@ -99,7 +109,11 @@ PostModal.propTypes = {
 function Logo() {
   return (
     <header className="flex justify-center items-center py-3 px-4">
-      <img src={logo} alt="logo" className="h-[1.8663rem] w-[3.96013rem]" />
+      <img
+        src={logo}
+        alt="logo"
+        className="md:h-[1.8663rem] md:w-[3.96013rem] h-mobile-view-logo w-mobile-view-logo"
+      />
     </header>
   );
 }
