@@ -7,8 +7,6 @@ import Button from "../../components/Button";
 import google from "../../assets/google.svg";
 import SignInModal from "../../components/SignInModal";
 
-const BASE_URL = "https://one00x-react-backend.onrender.com";
-
 function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -19,29 +17,6 @@ function Signup() {
   };
   const openModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleSignIn = async (email, password) => {
-    try {
-      const response = await fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.status === 200) {
-        navigate("/homefeed");
-      }
-      if (response.status === 400 || response.status === 401) {
-        const errorText = await response.text();
-        console.error(`Error ${response.status}: ${errorText}`);
-        setShowError(true);
-      }
-    } catch (e) {
-      console.log("Error", e);
-    }
   };
 
   return (
@@ -84,8 +59,8 @@ function Signup() {
           <SignInModal
             isOpen={isModalOpen}
             onClose={closeModal}
-            handleSignIn={handleSignIn}
             showError={showError}
+            setShowError={setShowError}
           />
         </div>
       </section>

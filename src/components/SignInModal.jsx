@@ -1,13 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import cross from "../assets/cross.png";
 import logo from "../assets/logo.png";
 import google from "../assets/google.svg";
 import { useState } from "react";
+import { userLogin } from "../services/authService";
 
-function PostModal({ isOpen, onClose, handleSignIn, showError }) {
+function PostModal({ isOpen, onClose, showError }) {
   const [inputText, setInputText] = useState("batman@example.com");
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
+
+  const handleLogin = async (e, email, password) => {
+    e.preventDefault();
+    try {
+      const response = await userLogin(email, password);
+      console.log(response);
+      navigate("/homefeed");
+
+      // save response.token in context
+      // redirect to homefeed based on response.token
+    } catch (e) {
+      console.log("Error", e);
+    }
+  };
+
   return (
     <div
       className={`${
@@ -59,7 +77,10 @@ function PostModal({ isOpen, onClose, handleSignIn, showError }) {
                 </span>
                 <div className="w-full h-px bg-neutral-700" />
               </div>
-              <div className="w-full flex flex-col gap-3 ">
+              <form
+                onSubmit={(e) => handleLogin(e, inputText, "gothamrocks")}
+                className="w-full flex flex-col gap-3 "
+              >
                 <input
                   type="text"
                   value={inputText}
@@ -68,9 +89,10 @@ function PostModal({ isOpen, onClose, handleSignIn, showError }) {
                   className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
                 />
                 <button
-                  onClick={() =>
-                    handleSignIn("batman@example.com", "gothamrocks")
-                  }
+                  // onClick={() =>
+                  //   handleSignIn("batmans@example.com", "gothamrocks")
+                  // }
+
                   className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
                 >
                   <span className="text-neutral-1000 font-chirp text-center text-base font-bold">
@@ -82,7 +104,7 @@ function PostModal({ isOpen, onClose, handleSignIn, showError }) {
                     User not found
                   </h1>
                 )}
-              </div>
+              </form>
               <button className="mt-4 flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-1000 border border-gray-500 shadow-custom backdrop-blur-custom hover:bg-neutral-800 disabled:bg-neutral-700">
                 <span className="text-neutral-50 font-chirp text-center text-base font-bold">
                   Forgot Password?
