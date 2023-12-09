@@ -6,21 +6,21 @@ import logo from "../assets/logo.png";
 import google from "../assets/google.svg";
 import { useState } from "react";
 import { userLogin } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 
 function PostModal({ isOpen, onClose, showError }) {
   const [inputText, setInputText] = useState("batman@example.com");
-  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e, email, password) => {
     e.preventDefault();
     try {
       const response = await userLogin(email, password);
       console.log(response);
+      const authToken = response.token;
+      login(authToken);
       navigate("/homefeed");
-
-      // save response.token in context
-      // redirect to homefeed based on response.token
     } catch (e) {
       console.log("Error", e);
     }
@@ -132,7 +132,6 @@ export default PostModal;
 PostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  handleSignIn: PropTypes.func.isRequired,
   showError: PropTypes.bool.isRequired,
 };
 

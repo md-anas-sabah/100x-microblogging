@@ -11,6 +11,7 @@ import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
 import FormContextProvider from "./context/FormContext";
 import { TweetProvider } from "./context/TweetContext";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -52,10 +53,12 @@ export default function App() {
     },
   ]);
   return (
-    <TweetProvider>
-      <FormContextProvider>
-        <RouterProvider router={router} />
-      </FormContextProvider>
-    </TweetProvider>
+    <AuthProvider>
+      <TweetProvider>
+        <FormContextProvider>
+          <RouterProvider router={router} />
+        </FormContextProvider>
+      </TweetProvider>
+    </AuthProvider>
   );
 }
