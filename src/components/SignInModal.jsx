@@ -9,7 +9,8 @@ import { userLogin } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 
 function PostModal({ isOpen, onClose, showError }) {
-  const [inputText, setInputText] = useState("batman@example.com");
+  const [email, setEmail] = useState("batman@example.com");
+  const [password, setPassword] = useState("gothamrocks");
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -78,14 +79,21 @@ function PostModal({ isOpen, onClose, showError }) {
                 <div className="w-full h-px bg-neutral-700" />
               </div>
               <form
-                onSubmit={(e) => handleLogin(e, inputText, "gothamrocks")}
+                onSubmit={(e) => handleLogin(e, email, password)}
                 className="w-full flex flex-col gap-3 "
               >
                 <input
-                  type="text"
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Phone,email or username"
+                  className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
+                />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
                   className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
                 />
                 <button
