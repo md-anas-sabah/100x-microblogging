@@ -1,4 +1,5 @@
 const BASE_URL = "https://one00x-react-backend.onrender.com";
+// const BASE_URL = "http://localhost:4000";
 
 export const userLogin = async (email, password) => {
   try {
@@ -9,14 +10,14 @@ export const userLogin = async (email, password) => {
       },
       body: JSON.stringify({ email, password }),
     });
-
+    console.log(response);
     if (!response.ok) {
       throw new Error("Invalid credentials");
     }
-
-    const data = await response.json();
-    console.log(data);
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
   } catch (e) {
     console.log("Error", e);
   }

@@ -1,31 +1,41 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import cross from "../assets/cross.png";
-import logo from "../assets/logo.png";
-import google from "../assets/google.svg";
-import { useState } from "react";
 import { userLogin } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 
+import cross from "../assets/cross.png";
+import logo from "../assets/logo.png";
+import visible from "../assets/visible.svg";
+import google from "../assets/google.svg";
+
 function PostModal({ isOpen, onClose, showError }) {
-  const [email, setEmail] = useState("batman@example.com");
-  const [password, setPassword] = useState("gothamrocks");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleLogin = async (e, email, password) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await userLogin(email, password);
-      console.log(response);
-      const authToken = response.token;
-      login(authToken);
-      navigate("/homefeed");
+      console.log("response-> ", response);
+
+      // const authToken = response.token;
+      // if (authToken) {
+        // login(authToken);
+      //   navigate("/homefeed");
+      // }
     } catch (e) {
       console.log("Error", e);
     }
   };
+
+  function handleVisible() {
+    setShowPassword(!showPassword);
+  }
 
   return (
     <div
@@ -79,30 +89,56 @@ function PostModal({ isOpen, onClose, showError }) {
                 <div className="w-full h-px bg-neutral-700" />
               </div>
               <form
-                onSubmit={(e) => handleLogin(e, email, password)}
+                onSubmit={(e) => handleLogin(e)}
                 className="w-full flex flex-col gap-3 "
               >
                 <input
                   type="email"
                   value={email}
+                  autoComplete="on"
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Phone,email or username"
                   className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
                 />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                  className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
-                />
-                <button
-                  // onClick={() =>
-                  //   handleSignIn("batmans@example.com", "gothamrocks")
-                  // }
+                <div className="">
+                  {showPassword ? (
+                    <div className="flex justify-between border border-gray-800 rounded-lg">
+                      <input
+                        type="text"
+                        autoComplete="on"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        className="w-full h-12 px-4 rounded-lg bg-transparent  text-neutral-50 outline-none font-px-regular text-base font-normal"
+                      />
+                      <img
+                        src={visible}
+                        alt="success"
+                        onClick={handleVisible}
+                        className="cursor-pointer mr-2 h-8 w-8 flex mt-2"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex justify-between border border-gray-800 rounded-lg">
+                      <input
+                        type="password"
+                        value={password}
+                        autoComplete="on"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        className="w-full h-12 px-4 rounded-lg bg-transparent  text-neutral-50 outline-none font-px-regular text-base font-normal"
+                      />
+                      <img
+                        src={visible}
+                        alt="success"
+                        onClick={handleVisible}
+                        className="cursor-pointer mr-2 h-8 w-8 flex mt-2"
+                      />
+                    </div>
+                  )}
+                </div>
 
-                  className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
-                >
+                <button className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
                   <span className="text-neutral-1000 font-chirp text-center text-base font-bold">
                     Next
                   </span>
