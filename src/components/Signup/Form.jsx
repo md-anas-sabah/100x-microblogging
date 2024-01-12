@@ -5,6 +5,8 @@ import Button from "../../components/Button";
 import InputFieldset from "./InputFieldset";
 import { useFormContext } from "../../context/FormContext";
 
+const BASE_URL = "http://localhost:4000";
+
 function Form({ onSubmit }) {
   const {
     nameInput,
@@ -19,7 +21,7 @@ function Form({ onSubmit }) {
     setSelectedYear,
   } = useFormContext();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = {
@@ -29,6 +31,20 @@ function Form({ onSubmit }) {
       month: selectedMonth,
       year: selectedYear,
     };
+
+    try {
+      const response = await fetch(`${BASE_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(response);
+    } catch (err) {
+      console.log();
+    }
+
     onSubmit(formData);
   };
 

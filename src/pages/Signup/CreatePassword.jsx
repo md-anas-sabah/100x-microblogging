@@ -6,6 +6,7 @@ import Header from "../../components/Signup/Header";
 import visible from "../../assets/visible.svg";
 
 function CreatePassword() {
+  // const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 

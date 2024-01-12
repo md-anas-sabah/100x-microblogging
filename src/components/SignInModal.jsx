@@ -23,11 +23,11 @@ function PostModal({ isOpen, onClose, showError }) {
       const response = await userLogin(email, password);
       console.log("response-> ", response);
 
-      // const authToken = response.token;
-      // if (authToken) {
-        // login(authToken);
-      //   navigate("/homefeed");
-      // }
+      const authToken = response.token;
+      if (authToken) {
+        login(authToken);
+        navigate("/homefeed");
+      }
     } catch (e) {
       console.log("Error", e);
     }

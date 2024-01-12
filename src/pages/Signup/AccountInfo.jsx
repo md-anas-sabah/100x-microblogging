@@ -11,7 +11,6 @@ function AccountInfo() {
   const navigate = useNavigate();
 
   const handleSubmit = (data) => {
-    console.log(data);
     setFormData(data);
     navigate("/signup/accepted-info");
   };

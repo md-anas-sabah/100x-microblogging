@@ -1,5 +1,5 @@
-const BASE_URL = "https://one00x-react-backend.onrender.com";
-// const BASE_URL = "http://localhost:4000";
+// const BASE_URL = "https://one00x-react-backend.onrender.com";
+const BASE_URL = "http://localhost:4000";
 
 export const userLogin = async (email, password) => {
   try {
