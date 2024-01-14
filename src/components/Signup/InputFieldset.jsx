@@ -13,7 +13,7 @@ function InputFieldset({ getter, setter, name, type, placeholder }) {
           setter(e.target.value);
         }}
         placeholder={placeholder}
-        className="h-full text-white bg-transparent text-xlg md:text-base font-px-regular font-normal outline-none"
+        className="h-full w-full text-white bg-transparent text-xlg md:text-base font-px-regular font-normal outline-none"
       />
     </fieldset>
   );

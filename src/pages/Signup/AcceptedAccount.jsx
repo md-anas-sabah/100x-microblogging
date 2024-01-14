@@ -8,7 +8,9 @@ function AcceptedAccount() {
   const navigate = useNavigate();
   const { nameInput, emailInput, selectedDay, selectedMonth, selectedYear } =
     useFormContext();
-  const dateOfBirth = `${selectedDay} ${selectedMonth.toUpperCase()} ${selectedYear}`;
+  const dateOfBirth = `${selectedDay} ${
+    selectedMonth.charAt(0).toUpperCase() + selectedMonth.slice(1)
+  } ${selectedYear}`;
 
   return (
     <div className="flex flex-col justify-center md:h-screen bg-neutral-1000 w-screen">

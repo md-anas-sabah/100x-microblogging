@@ -20,16 +20,16 @@ function Form({ onSubmit }) {
     selectedYear,
     setSelectedYear,
   } = useFormContext();
-
+  const dateOfBirth = `${selectedDay} ${selectedMonth} ${selectedYear} `;
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = {
       name: nameInput,
       email: emailInput,
-      day: selectedDay,
-      month: selectedMonth,
-      year: selectedYear,
+      // day: selectedDay,
+      // month: selectedMonth,
+      // year: selectedYear,
+      dateOfBirth: dateOfBirth,
     };
 
     try {
