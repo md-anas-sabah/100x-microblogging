@@ -14,6 +14,7 @@ function FormContextProvider({ children }) {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+  const [password, setPassword] = useState("");
 
   const contextValue = {
     nameInput,
@@ -26,6 +27,8 @@ function FormContextProvider({ children }) {
     setSelectedMonth,
     selectedYear,
     setSelectedYear,
+    password,
+    setPassword,
   };
 
   return (

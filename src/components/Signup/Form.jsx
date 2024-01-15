@@ -30,7 +30,7 @@ function Form({ onSubmit }) {
       // day: selectedDay,
       // month: selectedMonth,
       // year: selectedYear,
-      dateOfBirth: dateOfBirth,
+      dateOfBirth,
     };
 
     // try {

@@ -25,10 +25,8 @@ function Verification() {
               </legend>
               <input
                 type="text"
-                name
-                id
                 placeholder="Verification code"
-                className="h-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
+                className="h-full w-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
             </fieldset>
             <p className="cursor-pointer self-end text-twitter-blue text-sm font-px-regular font-normal">

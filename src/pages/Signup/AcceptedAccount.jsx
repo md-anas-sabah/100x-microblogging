@@ -25,10 +25,11 @@ function AcceptedAccount() {
               </legend>
               <div className="flex justify-between">
                 <input
+                  readOnly
                   type="text"
                   placeholder="Name"
                   value={nameInput}
-                  className="h-full text-white md:text-base bg-transparent text-xlg font-px-regular font-normal outline-none"
+                  className="h-full w-full text-white md:text-base bg-transparent text-xlg font-px-regular font-normal outline-none"
                 />
                 <img src={tickCircle} alt="success" />
               </div>
@@ -39,10 +40,11 @@ function AcceptedAccount() {
               </legend>
               <div className="flex justify-between">
                 <input
+                  readOnly
                   type="email"
                   placeholder="Email"
                   value={emailInput}
-                  className="h-full md:text-base text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
+                  className="h-full w-full md:text-base text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
                 />
                 <img src={tickCircle} alt="visible" />
               </div>
@@ -53,10 +55,11 @@ function AcceptedAccount() {
               </legend>
               <div className="flex justify-between">
                 <input
+                  readOnly
                   type="text"
                   value={dateOfBirth}
                   placeholder="Date of birth"
-                  className="h-full md:text-base text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
+                  className="h-full w-full md:text-base text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
                 />
                 <img src={tickCircle} alt="success" />
               </div>

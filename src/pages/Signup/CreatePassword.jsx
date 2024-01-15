@@ -1,17 +1,59 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "../../components/Signup/Header";
 import visible from "../../assets/visible.svg";
+import { useFormContext } from "../../context/FormContext";
+
+const BASE_URL = "http://localhost:4000";
 
 function CreatePassword() {
-  // const [password, setPassword] = useState("");
+  const {
+    nameInput,
+    emailInput,
+    selectedDay,
+    selectedMonth,
+    selectedYear,
+    password,
+    setPassword,
+  } = useFormContext();
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   function handleVisible() {
     setShowPassword(!showPassword);
+  }
+
+  async function handleSignUp(e) {
+    e.preventDefault();
+    const dateOfBirth = `${selectedDay} ${selectedMonth} ${selectedYear} `;
+    const formData = {
+      displayName: nameInput,
+      email: emailInput,
+      dateOfBirth,
+      password,
+    };
+    try {
+      const response = await fetch(`${BASE_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      toast("Account created successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
+    } catch (err) {
+      toast("Error in creating account");
+      console.log();
+    }
   }
 
   return (
@@ -27,29 +69,22 @@ function CreatePassword() {
               Make sure it's 8 character or more
             </p>
           </div>
-          <div className="flex flex-col gap-3  self-stretch">
+          <form
+            onSubmit={handleSignUp}
+            className="flex flex-col gap-3  self-stretch"
+          >
             <fieldset className="custom-fieldset py-4 px-3 md:py-2 items-center self-stretch border border-neutral-500 rounded-4px focus-within:border-twitter-blue">
               <legend className="font-px-regular text-xs font-medium text-neutral-500 px-4px">
                 Password
               </legend>
-              <div className="flex justify-between">
-                {showPassword ? (
-                  <input
-                    type="text"
-                    name
-                    id
-                    placeholder="Password"
-                    className="h-full w-full text-white md:text-sm bg-transparent text-xlg font-px-regular font-normal outline-none"
-                  />
-                ) : (
-                  <input
-                    type="password"
-                    name
-                    id
-                    placeholder="Password"
-                    className="h-full text-white md:text-sm bg-transparent text-xlg font-px-regular font-normal outline-none"
-                  />
-                )}
+              <div className="flex justify-between items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  className="h-full w-full text-white md:text-sm bg-transparent text-xlg font-px-regular font-normal outline-none"
+                />
 
                 <img
                   src={visible}
@@ -59,19 +94,29 @@ function CreatePassword() {
                 />
               </div>
             </fieldset>
-          </div>
-        </section>
-        <section className="flex h-full md:mt-12 px-4 flex-col justify-end self-stretch">
-          <button
-            onClick={() => navigate("/homefeed")}
-            className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
-          >
-            <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
-              Next
-            </span>
-          </button>
+            <section className="flex h-full w-full md:mt-12 px-4 flex-col justify-end self-stretch">
+              <button className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
+                <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">
+                  Next
+                </span>
+              </button>
+            </section>
+          </form>
         </section>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition:Bounce
+      />
     </div>
   );
 }
