@@ -1,9 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import Header from "../../components/Signup/Header";
+import { useFormContext } from "../../context/FormContext";
 
 function Verification() {
+  const [verificationError, setVerificationError] = useState(false);
+  const { oneTimePassword, setOneTimePassword, emailInput, verificationData } =
+    useFormContext();
   const navigate = useNavigate();
+
+  const handleButton = () => {
+    if (verificationData === oneTimePassword) {
+      navigate("/signup/create-password");
+    } else {
+      setVerificationError(true);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center md:h-screen bg-neutral-1000 w-screen">
@@ -15,7 +29,7 @@ function Verification() {
               We sent you a code
             </h1>
             <p className="text-neutral-500 font-px-regular text-sm font-normal">
-              Enter it below to verify mdanassabah@gmail.com
+              {`Enter it below to verify ${emailInput}`}
             </p>
           </div>
           <div className="flex flex-col gap-3 self-stretch">
@@ -25,6 +39,8 @@ function Verification() {
               </legend>
               <input
                 type="text"
+                value={oneTimePassword}
+                onChange={(e) => setOneTimePassword(e.target.value)}
                 placeholder="Verification code"
                 className="h-full w-full text-white bg-transparent text-xlg font-px-regular font-normal outline-none"
               />
@@ -34,9 +50,12 @@ function Verification() {
             </p>
           </div>
         </section>
-        <section className="flex h-full pt-20 px-4 flex-col justify-end self-stretch">
+        {verificationError ? (
+          <p className="text-red-500 text-center">Invalid Verification Code.</p>
+        ) : null}
+        <section className="flex h-full -mt-10 pt-20 px-4 flex-col justify-end self-stretch">
           <button
-            onClick={() => navigate("/signup/create-password")}
+            onClick={handleButton}
             className="py-2 px-6 w-full rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700"
           >
             <span className="text-neutral-1000 font-px-regular text-base font-bold text-center">

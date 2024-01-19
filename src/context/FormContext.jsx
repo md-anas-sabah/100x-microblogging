@@ -15,6 +15,24 @@ function FormContextProvider({ children }) {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [password, setPassword] = useState("");
+  const [oneTimePassword, setOneTimePassword] = useState("");
+  const [verificationData, setVerificationData] = useState("");
+
+  const sendVerificationMail = async (emailInput) => {
+    const response = await fetch("http://localhost:4000/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailInput,
+      }),
+    });
+
+    const data = await response.json();
+    setVerificationData(data.otp);
+    console.log(data);
+  };
 
   const contextValue = {
     nameInput,
@@ -29,6 +47,10 @@ function FormContextProvider({ children }) {
     setSelectedYear,
     password,
     setPassword,
+    oneTimePassword,
+    setOneTimePassword,
+    sendVerificationMail,
+    verificationData,
   };
 
   return (

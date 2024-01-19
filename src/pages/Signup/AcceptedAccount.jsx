@@ -6,11 +6,22 @@ import { useFormContext } from "../../context/FormContext";
 
 function AcceptedAccount() {
   const navigate = useNavigate();
-  const { nameInput, emailInput, selectedDay, selectedMonth, selectedYear } =
-    useFormContext();
+  const {
+    nameInput,
+    emailInput,
+    selectedDay,
+    selectedMonth,
+    selectedYear,
+    sendVerificationMail,
+  } = useFormContext();
   const dateOfBirth = `${selectedDay} ${
     selectedMonth.charAt(0).toUpperCase() + selectedMonth.slice(1)
   } ${selectedYear}`;
+
+  const nextPage = () => {
+    sendVerificationMail(emailInput);
+    navigate("/signup/verify-account");
+  };
 
   return (
     <div className="flex flex-col justify-center md:h-screen bg-neutral-1000 w-screen">
@@ -69,7 +80,7 @@ function AcceptedAccount() {
         <section className="flex h-full px-4 flex-col justify-end self-stretch">
           <button
             className="p-5 w-full md:mt-10 md:p-2 rounded-full bg-twitter-blue shadow-custom backdrop-blur-custom"
-            onClick={() => navigate("/signup/verify-account")}
+            onClick={nextPage}
           >
             <span className="text-neutral-50 font-px-regular text-base font-bold text-center">
               Sign up
