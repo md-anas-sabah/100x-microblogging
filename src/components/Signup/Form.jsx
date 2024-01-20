@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import ChevronDown from "../../assets/ChevronDown.png";
@@ -6,9 +7,8 @@ import InputFieldset from "./InputFieldset";
 import { useFormContext } from "../../context/FormContext";
 import { dates, months, years } from "../../utils/utils";
 
-// const BASE_URL = "http://localhost:4000";
-
 function Form({ onSubmit }) {
+  const [showError, setShowError] = useState(false);
   const {
     nameInput,
     setNameInput,
@@ -27,24 +27,8 @@ function Form({ onSubmit }) {
     const formData = {
       name: nameInput,
       email: emailInput,
-      // day: selectedDay,
-      // month: selectedMonth,
-      // year: selectedYear,
       dateOfBirth,
     };
-
-    // try {
-    //   const response = await fetch(`${BASE_URL}/signup`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-    //   console.log(response);
-    // } catch (err) {
-    //   console.log();
-    // }
 
     onSubmit(formData);
   };
