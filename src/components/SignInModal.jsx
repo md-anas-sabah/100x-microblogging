@@ -2,34 +2,26 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { userLogin } from "../services/authService";
-import { useAuth } from "../context/AuthContext";
-
 import cross from "../assets/cross.png";
 import logo from "../assets/logo.png";
 import visible from "../assets/visible.svg";
 import google from "../assets/google.svg";
+import { useAuth } from "../context/AuthContext";
 
 function PostModal({ isOpen, onClose, showError }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { email, setEmail, password, setPassword, login, error } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await userLogin(email, password);
-      console.log("response-> ", response);
-
-      const authToken = response.token;
-      if (authToken) {
-        login(authToken);
-        navigate("/homefeed");
-      }
-    } catch (e) {
-      console.log("Error", e);
+      await login();
+      navigate("/homefeed");
+      onClose();
+    } catch {
+      console.error(error);
     }
   };
 
@@ -101,41 +93,22 @@ function PostModal({ isOpen, onClose, showError }) {
                   className="w-full h-12 px-4 rounded-lg bg-transparent border border-gray-800 text-neutral-50 outline-none font-px-regular text-base font-normal"
                 />
                 <div className="">
-                  {showPassword ? (
-                    <div className="flex justify-between border border-gray-800 rounded-lg">
-                      <input
-                        type="text"
-                        autoComplete="on"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        className="w-full h-12 px-4 rounded-lg bg-transparent  text-neutral-50 outline-none font-px-regular text-base font-normal"
-                      />
-                      <img
-                        src={visible}
-                        alt="success"
-                        onClick={handleVisible}
-                        className="cursor-pointer mr-2 h-8 w-8 flex mt-2"
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex justify-between border border-gray-800 rounded-lg">
-                      <input
-                        type="password"
-                        value={password}
-                        autoComplete="on"
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        className="w-full h-12 px-4 rounded-lg bg-transparent  text-neutral-50 outline-none font-px-regular text-base font-normal"
-                      />
-                      <img
-                        src={visible}
-                        alt="success"
-                        onClick={handleVisible}
-                        className="cursor-pointer mr-2 h-8 w-8 flex mt-2"
-                      />
-                    </div>
-                  )}
+                  <div className="flex justify-between border border-gray-800 rounded-lg">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="on"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Password"
+                      className="w-full h-12 px-4 rounded-lg bg-transparent  text-neutral-50 outline-none font-px-regular text-base font-normal"
+                    />
+                    <img
+                      src={visible}
+                      alt="success"
+                      onClick={handleVisible}
+                      className="cursor-pointer mr-2 h-8 w-8 flex mt-2"
+                    />
+                  </div>
                 </div>
 
                 <button className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">

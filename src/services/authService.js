@@ -1,5 +1,4 @@
-// const BASE_URL = "https://one00x-react-backend.onrender.com";
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const userLogin = async (email, password) => {
   try {

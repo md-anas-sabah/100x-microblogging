@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PropTypes from "prop-types";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import AcceptedAccount from "./pages/Signup/AcceptedAccount";
 import AccountInfo from "./pages/Signup/AccountInfo";
@@ -11,7 +16,12 @@ import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/Profile/EditProfile";
 import FormContextProvider from "./context/FormContext";
 import { TweetProvider } from "./context/TweetContext";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
+const ProtectedRoute = ({ children }) => {
+  const { authToken } = useAuth();
+  return authToken ? children : <Navigate to="/" />;
+};
 
 export default function App() {
   const router = createBrowserRouter([
@@ -37,7 +47,11 @@ export default function App() {
     },
     {
       path: "/homefeed",
-      element: <Home />,
+      element: (
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/compose-tweet",
@@ -62,3 +76,7 @@ export default function App() {
     </AuthProvider>
   );
 }
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node,
+};

@@ -8,10 +8,12 @@ import group from "../../assets/group.svg";
 import logo from "../../assets/logo.png";
 import avatar from "../../assets/avatar.png";
 import Modal from "../PostModal";
+import { useAuth } from "../../context/AuthContext";
 
 function LeftSidebar() {
   const [showOption, setShowOption] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { logout } = useAuth();
 
   const handleOption = () => {
     setShowOption(!showOption);
@@ -78,6 +80,7 @@ function LeftSidebar() {
         <img src={option} alt="option" />
       </div>
       <div
+        onClick={logout}
         className={`${
           showOption ? "flex" : "hidden"
         } bg-neutral-1000  items-center justify-center border shadow shadow-white  h-12 w-52 absolute bottom-[90px] left-[265px] rounded-lg cursor-pointer`}

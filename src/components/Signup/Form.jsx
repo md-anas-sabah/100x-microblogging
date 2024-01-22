@@ -7,8 +7,11 @@ import InputFieldset from "./InputFieldset";
 import { useFormContext } from "../../context/FormContext";
 import { dates, months, years } from "../../utils/utils";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Form({ onSubmit }) {
   const [showError, setShowError] = useState(false);
+  const [emailExist, setEmailExist] = useState("");
   const {
     nameInput,
     setNameInput,
@@ -22,15 +25,60 @@ function Form({ onSubmit }) {
     setSelectedYear,
   } = useFormContext();
   const dateOfBirth = `${selectedDay} ${selectedMonth} ${selectedYear} `;
+  const calculateAge = () => {
+    const currentDate = new Date();
+    const userSelectedDate = new Date(
+      `${selectedMonth} ${selectedDay}, ${selectedYear}`
+    );
+    let age = currentDate.getFullYear() - userSelectedDate.getFullYear();
+
+    if (
+      currentDate.getMonth() < userSelectedDate.getMonth() ||
+      (currentDate.getMonth() === userSelectedDate.getMonth() &&
+        currentDate.getDate() < userSelectedDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
+  const handleEmailCheck = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/checkEmail`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailInput,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data.message);
+      if (data) {
+        setEmailExist(data.message); // Email detected
+      }
+    } catch (e) {
+      throw new Error(`HTTP error!`);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = {
-      name: nameInput,
-      email: emailInput,
-      dateOfBirth,
-    };
+    handleEmailCheck();
+    const age = calculateAge();
+    if (age < 13) {
+      setShowError(true);
+    } else {
+      const formData = {
+        name: nameInput,
+        email: emailInput,
+        dateOfBirth,
+      };
 
-    onSubmit(formData);
+      onSubmit(formData);
+    }
   };
 
   return (
@@ -53,6 +101,11 @@ function Form({ onSubmit }) {
           getter={emailInput}
           setter={setEmailInput}
         />
+        {emailExist !== null && (
+          <p className="bg-red-500 -mt-2 w-full text-center rounded-b-xl">
+            {emailExist === "Email detected" ? "Email already exists." : null}
+          </p>
+        )}
         <div className="flex flex-col gap-2 self-stretch">
           <h3 className="text-neutral-50 font-px-regular text-15px md:text-sm font-bold">
             Date of birth
@@ -141,6 +194,11 @@ function Form({ onSubmit }) {
           </fieldset>
         </div>
       </div>
+      {!showError ? null : (
+        <p className="bg-red-500 text-center rounded-b-xl">
+          Age should be greater than 13 Years.
+        </p>
+      )}
       <div className="flex h-full px-4 flex-col justify-end md:justify-start md:mt-10 self-stretch">
         <Button
           variant="default"
