@@ -9,7 +9,7 @@ import SignInModal from "../../components/SignInModal";
 
 function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showError, setShowError] = useState(false);
+  // const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -56,12 +56,7 @@ function Signup() {
               <Button variant="outline" text="Sign in" />
             </div>
           </div>
-          <SignInModal
-            isOpen={isModalOpen}
-            onClose={closeModal}
-            showError={showError}
-            setShowError={setShowError}
-          />
+          <SignInModal isOpen={isModalOpen} onClose={closeModal} />
         </div>
       </section>
     </div>

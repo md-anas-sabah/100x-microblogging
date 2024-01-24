@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -8,19 +8,27 @@ import visible from "../assets/visible.svg";
 import google from "../assets/google.svg";
 import { useAuth } from "../context/AuthContext";
 
-function PostModal({ isOpen, onClose, showError }) {
-  const { email, setEmail, password, setPassword, login, error } = useAuth();
+function PostModal({ isOpen, onClose }) {
+  const { email, setEmail, password, setPassword, login, error, authToken } =
+    useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  // eslint-disable-next-line no-unused-vars
+  const [credentialError, setCredentialError] = useState(false);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authToken) {
+      navigate("/homefeed");
+    }
+  }, [authToken, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await login();
-      navigate("/homefeed");
-      onClose();
+      // navigate("/homefeed");
     } catch {
+      setCredentialError(true);
       console.error(error);
     }
   };
@@ -110,17 +118,17 @@ function PostModal({ isOpen, onClose, showError }) {
                     />
                   </div>
                 </div>
+                {credentialError && (
+                  <h1 className="text-red-900 text-center font-bold font-px-regular">
+                    Invalid Credentials
+                  </h1>
+                )}
 
                 <button className=" flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-50 shadow-custom backdrop-blur-custom hover:bg-neutral-200 disabled:bg-neutral-700">
                   <span className="text-neutral-1000 font-chirp text-center text-base font-bold">
                     Next
                   </span>
                 </button>
-                {showError && (
-                  <h1 className="text-red-900 text-center font-bold font-px-regular">
-                    User not found
-                  </h1>
-                )}
               </form>
               <button className="mt-4 flex w-full py-2 md:py-3 px-6 justify-center items-center gap-10px rounded-4xl bg-neutral-1000 border border-gray-500 shadow-custom backdrop-blur-custom hover:bg-neutral-800 disabled:bg-neutral-700">
                 <span className="text-neutral-50 font-chirp text-center text-base font-bold">
@@ -149,7 +157,6 @@ export default PostModal;
 PostModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  showError: PropTypes.bool.isRequired,
 };
 
 function Logo() {

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log("Response", data);
         const receivedAuthToken = data.token;
         setAuthToken(receivedAuthToken);
         setError(null);
@@ -28,8 +30,9 @@ export const AuthProvider = ({ children }) => {
         const errorData = await response.json();
         setError(errorData.message || "Login Failed");
       }
-    } catch (e) {
-      console.log("Error", e);
+    } catch () {
+      const errorData = await response.json();
+      console.log("Error", errorData);
     }
   };
 
@@ -56,7 +59,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   return useContext(AuthContext);
 };
